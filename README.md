@@ -38,6 +38,23 @@ Exploring different workflow patterns in LangGraph and implementing them through
 - [`04_essay_checking_workflow`](notebooks/04_essay_checking_workflow.ipynb) — Parallelization
 - [`05_reply_review_workflow`](notebooks/05_reply_review_workflow.ipynb) — Conditional workflows (Routing)
 
+### Lesson 3 — Persistence and Memory
+
+Exploring persistence and state management in LangGraph to build stateful conversational applications, inspect checkpoints, and implement advanced controls like time travel and fault tolerance.
+
+**Topics covered:**
+- Concept of persistence and checkpointers (`InMemorySaver`)
+- Short-term conversational memory with message reducers (`add_messages`)
+- Multi-turn conversation and thread-level state isolation (`thread_id`)
+- State inspection and history tracking (`get_state`, `get_state_history`)
+- Time travel (replaying and branching execution from past checkpoints)
+- State editing and modifying checkpoints (`update_state`)
+- Fault tolerance and resuming interrupted/failed workflows
+
+**Practical implementations:**
+- [`06_memory_chatbot`](notebooks/06_memory_chatbot.ipynb) — Conversational chatbot with short-term memory and thread management
+- [`07_persistance`](notebooks/07_persistance.ipynb) — State persistence, time travel, state updates, and fault tolerance
+
 ## Learning Resource
 
 This repository follows the [CampusX LangGraph Tutorial Series](https://www.youtube.com/playlist?list=PLKnIA16_RmvYsvB8qkUQuJmJNuiCUJFPL) on YouTube.
