@@ -1,5 +1,5 @@
 import streamlit as st
-from backend import chatbot
+from backend import chatbot, get_chat_threads
 from langchain_core.messages import HumanMessage
 import uuid
 
@@ -8,7 +8,7 @@ import uuid
 
 # ---------Utility Func----------
 def generate_uuid():
-    thread_id = uuid.uuid4()
+    thread_id = str(uuid.uuid4())
     return thread_id
 
 def reset_chat():
@@ -30,7 +30,7 @@ if "message_history" not in st.session_state:
     st.session_state["message_history"] = []
 
 if "chat_threads" not in st.session_state:
-    st.session_state["chat_threads"] = []
+    st.session_state["chat_threads"] = get_chat_threads()
 
 if "thread_id" not in st.session_state:
     st.session_state["thread_id"] = generate_uuid()
@@ -55,13 +55,16 @@ for i, thread in enumerate(st.session_state["chat_threads"]):
         #     st.session_state["chat_threads"].pop(0)
         st.session_state["thread_id"] = st.session_state["chat_threads"][i]
         st.session_state["message_history"] = []
-        for msg in chatbot.get_state(config=CONFIG).values["messages"]:
+        if chatbot.get_state(config=CONFIG).values:
+            for msg in chatbot.get_state(config=CONFIG).values["messages"]:
 
-            if isinstance(msg, HumanMessage):
-                st.session_state["message_history"].append({"role": "user", "content": msg.content})
-                continue
+                if isinstance(msg, HumanMessage):
+                    st.session_state["message_history"].append({"role": "user", "content": msg.content})
+                    continue
 
-            st.session_state["message_history"].append({"role": "assistant", "content": msg.content})
+                st.session_state["message_history"].append({"role": "assistant", "content": msg.content})
+            # else:
+                
 
 
 
